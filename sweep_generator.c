@@ -42,7 +42,7 @@
 
 
 
-/* if you want to create an EDFplus file instead of BDFplus, outcomment the next line: */
+// Uncomment the next line to create a BSF+ file instead of EDF+:
 //#define BDF_FORMAT
 
 
@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
       chns=1,
       smp_freq=8192,
       fileduration=300,
-      linear=1;
+      linear=0;
 
   double buf[smp_freq],
          q,
@@ -73,6 +73,12 @@ int main(int argc, char *argv[])
 
   char str[256];
 
+
+#if defined(__APPLE__) || defined(__MACH__) || defined(__APPLE_CC__)
+#define expo __exp10
+#else
+#define expo exp10
+#endif
 
 
 #ifdef BDF_FORMAT
@@ -221,8 +227,8 @@ int main(int argc, char *argv[])
       }
       else
       {
-//        freq = exp10((((double)sampleswritten / (double)samples)) * log10(stopfreq));
-        freq = exp10(((((startfreq / stopfreq) * ((stopfreq / freqspan) * samples)) + sampleswritten) / ((stopfreq / freqspan) * samples)) * log10(stopfreq));
+        // freq = expo((((double)sampleswritten / (double)samples)) * log10(stopfreq));
+        freq = expo(((((startfreq / stopfreq) * ((stopfreq / freqspan) * samples)) + sampleswritten) / ((stopfreq / freqspan) * samples)) * log10(stopfreq));
       }
       sampleswritten++;
     }
@@ -336,20 +342,3 @@ void remove_trailing_zeros(char *str)
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -69,12 +69,8 @@
 #define FILE_DURATION 600
 
 
-/* if you want to create an EDFplus file instead of BDFplus, outcomment the next line: */
-
-
-#define BDF_FORMAT
-
-
+// Uncomment the next line to create a BSF+ file instead of EDF+:
+// #define BDF_FORMAT
 
 
 int main(int argc, char *argv[])

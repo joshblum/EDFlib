@@ -1,0 +1,6 @@
+*.o
+*.[be]df
+sine
+sweep
+test_edflib
+test_generator
