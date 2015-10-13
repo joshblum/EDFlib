@@ -1,6 +1,6 @@
 *.o
 *.[be]df
-sine
-sweep
+sine_generator
+sweep_generator
 test_edflib
 test_generator
