@@ -5,6 +5,7 @@
 * All rights reserved.
 *
 * email: teuniz@gmail.com
+* github: https://github.com/Teuniz/EDFlib
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions are met:
@@ -121,6 +122,7 @@ struct edf_annotation_struct{                           /* this structure is use
 
 
 struct edf_hdr_struct{                     /* this structure contains all the relevant EDF header info and will be filled when calling the function edf_open_file_readonly() */
+  const char* path;                              /* path to the file */
   int       handle;                        /* a handle (identifier) used to distinguish the different files */
   int       filetype;                      /* 0: EDF, 1: EDFplus, 2: BDF, 3: BDFplus, a negative number means an error */
   int       edfsignals;                    /* number of EDF signals in the file, annotation channels are NOT included */
@@ -172,7 +174,7 @@ int edfopen_file_readonly(const char *path, struct edf_hdr_struct *edfhdr, int r
 
 
 
-int edfread_physical_samples(int handle, int edfsignal, int n, double *buf);
+int edfread_physical_samples(int handle, int edfsignal, int n, float *buf);
 
 /* reads n samples from edfsignal, starting from the current sample position indicator, into buf (edfsignal starts at 0) */
 /* the values are converted to their physical values e.g. microVolts, beats per minute, etc. */

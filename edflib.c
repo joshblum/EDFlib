@@ -5,6 +5,7 @@
 * All rights reserved.
 *
 * email: teuniz@gmail.com
+* github: https://github.com/Teuniz/EDFlib
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions are met:
@@ -192,9 +193,6 @@ static int edflib_fprint_int_number_nonlocalized(FILE *, int, int, int);
 static int edflib_fprint_ll_number_nonlocalized(FILE *, long long, int, int);
 
 
-
-
-
 int edflib_is_file_used(const char *path)
 {
   int i, file_used=0;
@@ -251,7 +249,6 @@ int edfopen_file_readonly(const char *path, struct edf_hdr_struct *edfhdr, int r
 
   struct edfhdrblock *hdr;
 
-
   if(read_annotations<0)
   {
     edfhdr->filetype = EDFLIB_INVALID_READ_ANNOTS_VALUE;
@@ -268,6 +265,7 @@ int edfopen_file_readonly(const char *path, struct edf_hdr_struct *edfhdr, int r
 
   memset(edfhdr, 0, sizeof(struct edf_hdr_struct));
 
+  edfhdr->path = path;
   if(edf_files_open>=EDFLIB_MAXFILES)
   {
     edfhdr->filetype = EDFLIB_MAXFILES_REACHED;
@@ -813,7 +811,7 @@ void edfrewind(int handle, int edfsignal)
 }
 
 
-int edfread_physical_samples(int handle, int edfsignal, int n, double *buf)
+int edfread_physical_samples(int handle, int edfsignal, int n, float *buf)
 {
   int bytes_per_smpl=2,
       tmp,
@@ -952,7 +950,7 @@ int edfread_physical_samples(int handle, int edfsignal, int n, double *buf)
       }
       var.four[1] = tmp;
 
-      buf[i] = phys_bitvalue * (phys_offset + (double)var.two_signed[0]);
+      buf[i] = (float) phys_bitvalue * (phys_offset + (double)var.two_signed[0]);
 
       sample_pntr++;
     }
@@ -988,7 +986,7 @@ int edfread_physical_samples(int handle, int edfsignal, int n, double *buf)
         var.four[3] = 0x00;
       }
 
-      buf[i] = phys_bitvalue * (phys_offset + (double)var.one_signed);
+      buf[i] = (float) phys_bitvalue * (phys_offset + (double)var.one_signed);
 
       sample_pntr++;
     }
