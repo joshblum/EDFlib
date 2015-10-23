@@ -45,6 +45,8 @@
 #include <time.h>
 
 
+#define EDFLIB_VERSION 111
+#define EDFLIB_MAXFILES 64
 
 #define EDFLIB_TIME_DIMENSION (10000000LL)
 #define EDFLIB_MAXSIGNALS 512
