@@ -69,7 +69,7 @@
 #define FILE_DURATION 600
 
 
-// Uncomment the next line to create a BSF+ file instead of EDF+:
+// Uncomment the next line to create a BDF+ file instead of EDF+:
 // #define BDF_FORMAT
 
 
